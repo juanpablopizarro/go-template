@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-service
+spec:
+  type: NodePort
+  selector:
+    app: service-template ## this is spec.template.metadata.labels.app value from ping-deployment.yaml
+  ports:
+  - name: http
+    port: 8080

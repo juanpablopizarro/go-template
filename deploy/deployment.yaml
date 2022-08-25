@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-deployment ## deployment controller name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-template ## what we want to replicate
+  template:
+    metadata:
+      labels:
+        app: service-template ## the application name, usually nginx-app
+    spec:
+      containers:
+      - name: demo ## just a container name
+        image: demo ## this is the docker image TAG
+        env:
+        - name: APP_PORT
+          value: "8080"
+        imagePullPolicy: Never  ## in order to look at the local docker registry only
+        resources:
+          limits:
+            memory: 256Mi
+            cpu: 0.5
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP

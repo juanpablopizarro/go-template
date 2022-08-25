@@ -6,7 +6,7 @@ COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 
-COPY cmd/ ./cmd/
+COPY . .
 
 RUN go build -o /app/go-template /app/cmd/main.go 
 
